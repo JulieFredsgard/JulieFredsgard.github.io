@@ -13,7 +13,7 @@ body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #fdf9ec;
+    background-color:  #fffef5;
     display: flex;
     flex-direction: column; /* Stack children vertically */
 }
@@ -74,16 +74,18 @@ h3 {
 }
 
 
+.hero-section {
+    padding: 30px; /* Samme mekanik som .project-section */
+}
 
-/* Container for layout */
 .container1 {
-    display: flex; /* Use Flexbox for layout */
-    justify-content: space-between; /* Space between the text and other content */
-    align-items: center; /* Center items vertically */
-    padding-left: 70px; /* Adjust padding as needed */
-    padding-right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
     padding-bottom: 100px;
-    padding-top: 20px;
+    box-sizing: border-box;
 }
 
 /* Text section styling */
@@ -106,8 +108,6 @@ h3 {
 .other-section img {
     max-width: 70%; /* Ensure image fits within the container */
     height: auto; /* Maintain aspect ratio */
-    border-radius: 100%; /* Optional: rounded corners */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
 }
 
 
@@ -120,85 +120,89 @@ h3 {
 }
 
 
-
-/* Styling for the image gallery */
-.image-gallery {
-    background-color: #fdf4dc;
-    display: flex; /* Arrange images in a row */
-    flex-wrap: wrap; /* Wrap to the next line if needed */
-    justify-content: space-around; /* Space out the images */
-    gap: 10px; /* Space between images */
-    padding-bottom: 70px;
-    padding-left: 70px;
-    padding-right: 70px;
+.project-section {
+    background-color: white; /* Baggrundsfarve for hele sektionen */
+    padding: 70px 30px;
 }
 
-/* Styling for the gallery heading */
-.image-gallery h2 {
-    font-family: "Poppins", sans-serif; /* Use your preferred font */
-    font-size: 2em; /* Adjust size as needed */
-    margin-bottom: 20px; /* Space between heading and images */
-    text-align: center; /* Center the heading above images */
-    width: 100%; /* Full width to center align the heading */
-    padding: 20px;
+.project-section__heading {
+    font-family: "Poppins", sans-serif;
+    font-size: 2.3em;
+    max-width: 1400px;
+    margin: 0 auto 16px auto; /* Auto-centreret ligesom resten, med luft nedenunder */
+    text-align: left;
 }
 
-.image-wrapper {
-    display: flex;
-    flex-direction: column; /* Stack image and caption vertically */
-    align-items: center; /* Center align items horizontally */
-    max-width: 550px; /* Maximum width for each image wrapper */
-    max-height: 400px; /* Maximum width for each image wrapper */
-    flex: 1 1 calc(50% - 20px); /* Allow two images per row with gap adjustment */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
-    position: relative; /* Position relative for overlay positioning */
+.project-box {
+    text-decoration: none; /* Fjerner den understregning links normalt har */
+    color: inherit; /* Teksten arver sidens normale farve i stedet for standard-blå link-farve */
+    display: block;
+    transition: opacity 0.3s ease; /* Gør overgangen blød */
 }
 
-/* Ensure a consistent aspect ratio for images */
-.image-container {
-    position: relative; /* Position relative for overlay positioning */
-    width: 100%; /* Responsive width */
-    height: 200px; /* Fixed height to ensure square aspect ratio */
-    overflow: hidden; /* Hide overflow if the image is larger */
-    border-radius: 8px; /* Optional: rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for better look */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 lige brede kolonner */
+    gap: 24px; /* Luft mellem kortene */
+    max-width: 1400px;
+    margin: 40px auto 0 auto; /* Luft foroven, auto-centreret ligesom heading */
+    padding: 0; /* Fjernet - lad .project-section's egen padding styre siderne */
 }
 
-.image-container img {
-    width: 100%; /* Stretch to cover the container */
-    height: 100%; /* Stretch to cover the container */
-    object-fit: cover; /* Ensure the image covers the container */
+.project-grid:hover .project-box {
+    opacity: 0.4; /* Dæmp alle kort når man hover et sted i gridet */
 }
 
-.overlay {
-    position: absolute; /* Position overlay on top of the image */
-    top: 0;
-    left: 0;
+.project-grid:hover .project-box:hover {
+    opacity: 1; /* Men det specifikke kort musen er over, forbliver fuldt synligt */
+}
+
+.project-box__image {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* I stedet for en fast height i pixels */
+    overflow: hidden;
+    background-color: rgb(245, 213, 255);
+}
+
+.project-box__image img {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
-    opacity: 1; /* Fully visible by default */
-    transition: opacity 0.3s ease; /* Smooth transition for the hover effect */
-    z-index: 1; /* Ensure it is above the image but below the caption */
+    object-fit: cover;
+    transition: transform 0.3s ease; /* Gør zoom-effekten "blød" i stedet for et hak */
 }
 
-.image-container:hover .overlay {
-    opacity: 0; /* Hide the overlay on hover */
+/* Tablet og mindre: 2 per række */
+@media screen and (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.image-caption {
-    margin-top: 10px; /* Space between the image and caption */
-    font-family: "Poppins", sans-serif; /* Same font family as used in other text */
-    font-size: 14px; /* Adjust font size as needed */
-    color: #333; /* Text color */
-    text-align: center; /* Center align text */
-    z-index: 2; /* Ensure the caption is above the overlay */
-    position: relative; /* Position relative for z-index to work */
-    padding-bottom: 30px;
+/* Mobil: 1 per række */
+@media screen and (max-width: 500px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
+.project-box:hover .project-box__image img {
+    transform: scale(1.05); /* Zoomer billedet 5% ind ved hover */
+}
 
+.project-box__title {
+    font-family: "Poppins", sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 16px;
+    margin-bottom: 4px; /* Fjerner browserens indbyggede afstand under titlen */
+}
 
+.project-box__subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 0px;
+}
 
 
 
@@ -206,7 +210,7 @@ h3 {
 
 /* Styling the entire navbar container */
 .navbar {
-    background-color: #fdf9ec; /* Dark background */
+    background-color: #fffef5; /* Dark background */
     overflow: hidden; /* Clear floats */
     position: fixed; /* Sticks to the top of the page */
     top: 0; /* Always on top */
