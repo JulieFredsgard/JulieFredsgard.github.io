@@ -186,16 +186,16 @@ h3 {
 
     .hero-text h1 {
         margin: 40px 0 20px 0; /* Meget mindre margin end de 100px/400px */
-        font-size: 3.5em; /* Reduceret fra 6em */
+        font-size: 2.9em; /* Reduceret fra 6em */
     }
 
     .fake-aa__icon svg {
-        width: 16px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
-        height: 16px;
+        width: 14px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
+        height: 14px;
     }
 
     .fake-aa__icon {
-        top: -0.22em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
+        top: -0.24em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
     }
 
     .hero-text h3 {
