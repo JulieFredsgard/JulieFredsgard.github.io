@@ -24,25 +24,88 @@
 
     <div class="content">
         <!-- Your main content here -->
-        <p>Hello, I'm Julie!</p>
         <!-- Other content -->
-<div class="hero-section">
-        <div class="container1">
-            <div class="text-section">
-                <!-- <h1 class="cursor typewriter-animation">Hello, I'm Julie!</h1> -->
-                <h1>Halløjsa, I'm Julie</h1>
-                <h3>This is a short presentation about myself. I am passionate about UX/UI design and web development. I love creating user-friendly interfaces and solving complex problems through design.</h3>
-                <h3>Feel free to browse my portfolio and contact me if you have any questions or opportunities.</h3>
-            </div>
-            <div class="other-section">
-                <!-- You can add an image or other content here -->
-                <img src="images/ProfilbilledeBW.jpg" alt="Julie">
-            </div>
+<div class="hero-wrapper">
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>JULIE<br>FREDSG<span class="fake-aa">A<span class="fake-aa__icon">
+    <img src="images/smiley-positive-svgrepo-com.svg" alt="">
+</span></span>RD</h1>
+            <h3>Cand.scient. i interaktionsdesign med erfaring i UX/UI design og visuel kommunikation.</h3>
+            <a href="projects.html" class="hero-button">SE PROJEKTER</a>
         </div>
+    </div>
+    <div class="hero-image">
+        <img src="images/ProfilbilledeBW.jpg" alt="Julie">
+    </div>
 </div>
 
+
+ 
+<section class="skills-section">
+    <div class="skills-section__inner">
+    <h2 class="skills-section__heading">Jeg har erfaring med</h2>
+    <div class="skills-grid">
+        <div class="skill-item">
+            <div class="skill-item__header">
+                <span class="skill-item__title">Digitalt & web design</span>
+                <span class="skill-item__icon">+</span>
+            </div>
+            <div class="skill-item__content">
+                <p>Digitalt design inkluderer website content og layouts, social media assets, web banners, præsentationer og andre grafiske elementer på digitale platforme.</p>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item__header">
+                <span class="skill-item__title">UX research</span>
+                <span class="skill-item__icon">+</span>
+            </div>
+            <div class="skill-item__content">
+                <p>Din tekst her.</p>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item__header">
+                <span class="skill-item__title">Prototyping</span>
+                <span class="skill-item__icon">+</span>
+            </div>
+            <div class="skill-item__content">
+                <p>Din tekst her.</p>
+            </div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item__header">
+                <span class="skill-item__title">Brugertest</span>
+                <span class="skill-item__icon">+</span>
+            </div>
+            <div class="skill-item__content">
+                <p>Din tekst her.</p>
+            </div>
+        </div>
+        <div class="skill-item">
+    <div class="skill-item__header">
+        <span class="skill-item__title">Wireframing</span>
+        <span class="skill-item__icon">+</span>
+    </div>
+    <div class="skill-item__content">
+        <p>Din tekst her.</p>
+    </div>
+</div>
+<div class="skill-item">
+    <div class="skill-item__header">
+        <span class="skill-item__title">Visuel identitet</span>
+        <span class="skill-item__icon">+</span>
+    </div>
+    <div class="skill-item__content">
+        <p>Din tekst her.</p>
+    </div>
+</div>
+        </div>
+    </div>
+</section>
+
 <section class="project-section">
-    <h2 class="project-section__heading">Projects</h2>
+    <h2 class="project-section__heading">PROJEKTER</h2>
     <div class="project-grid">
         <a href="projects/eggventures.html" class="project-box">
             <div class="project-box__image">
@@ -75,20 +138,9 @@
     </div>
 </section>
 
+<section class="divider-section"></section>
 
 
-<div class="container1">
-    <div class="text-section">
-        <!-- <h1 class="cursor typewriter-animation">Hello, I'm Julie!</h1> -->
-        <h1>Something</h1>
-        <h3>This is a short presentation about myself. I am passionate about UX/UI design and web development. I love creating user-friendly interfaces and solving complex problems through design.</h3>
-        <h3>Feel free to browse my portfolio and contact me if you have any questions or opportunities.</h3>
-    </div>
-    <div class="other-section">
-        <!-- You can add an image or other content here -->
-        <!-- <img src="images/Billede.JPG" alt="Julie"> -->
-    </div>
-</div>
 
 
     <!-- JavaScript to load navbar from an external file -->
@@ -113,5 +165,29 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+
+<script>
+    const skillHeaders = document.querySelectorAll('.skill-item__header');
+
+    skillHeaders.forEach(function(header) {
+        header.addEventListener('click', function() {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.skill-item__icon');
+
+            if (content.classList.contains('is-open')) {
+                // Lukker: sæt max-height til 0
+                content.style.maxHeight = '0px';
+                content.classList.remove('is-open');
+                icon.textContent = '+';
+            } else {
+                // Åbner: sæt max-height til indholdets faktiske højde
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.add('is-open');
+                icon.textContent = '−';
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
