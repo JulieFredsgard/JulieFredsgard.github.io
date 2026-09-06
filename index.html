@@ -157,7 +157,7 @@
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
 
-            // Scroll-koden flyttet herind, så den kører EFTER navbaren er indsat
+            // --- Scroll: skjul navbar ved scroll ned, vis igen ved scroll op ---
             let lastScrollY = window.scrollY;
             const navbar = document.querySelector('.navbar');
 
@@ -171,6 +171,24 @@
                 }
 
                 lastScrollY = currentScrollY;
+            });
+
+            // --- Burgermenu: åbn/luk ved klik på burger-ikonet ---
+            const burgerBtn = document.getElementById('navbar-burger-btn');
+            const navMenu = document.getElementById('navbar-menu');
+
+            burgerBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('is-open');
+                burgerBtn.classList.toggle('is-active');
+            });
+
+            // --- Luk menuen automatisk, når man klikker på et link ---
+            const menuLinks = navMenu.querySelectorAll('a');
+            menuLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('is-open');
+                    burgerBtn.classList.remove('is-active');
+                });
             });
         });
 </script>
