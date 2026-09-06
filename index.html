@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>My Website</title>
+    <title>Julie Fredsgård</title>
+    
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico">
+   <link rel="shortcut icon" href="images/smiley-positive-svgrepo-com.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +22,7 @@
 </head>
 <body>
     <div id="navbar"></div> 
+
 
     <div class="content">
         <!-- Your main content here -->
@@ -149,23 +151,40 @@
 
 
 
-    <!-- JavaScript to load navbar from an external file -->
-    <script>
-        fetch('navbar.html')
-              .then(response => response.text())
-             .then(data => document.getElementById('navbar').innerHTML = data);
-    </script>
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.body.insertAdjacentHTML('beforeend', data);
-                })
-                .catch(error => console.error('Error loading the footer:', error));
+            // Scroll-koden flyttet herind, så den kører EFTER navbaren er indsat
+            let lastScrollY = window.scrollY;
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', function() {
+                const currentScrollY = window.scrollY;
+
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    navbar.classList.add('navbar--hidden');
+                } else {
+                    navbar.classList.remove('navbar--hidden');
+                }
+
+                lastScrollY = currentScrollY;
+            });
         });
-    </script>
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            })
+            .catch(error => console.error('Error loading the footer:', error));
+    });
+</script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
