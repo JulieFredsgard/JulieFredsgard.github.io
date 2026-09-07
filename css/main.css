@@ -20,6 +20,7 @@ body {
     overflow-x: hidden;
 }
 
+
 /* Container for consistent margins */
 .container {
     max-width: 1300px; /* Adjust based on your design requirements */
@@ -81,7 +82,6 @@ h3 {
     display: flex;
     align-items: center;
     height: 1000px;
-    overflow: hidden; /* Ny linje - forhindrer blobben i nogensinde at skabe overflow her */ 
 }
 
 .hero-section {
@@ -237,6 +237,7 @@ h3 {
 
     .hero-section {
         padding: 0 20px;
+        overflow: hidden; /* Ny linje - forhindrer blobben i at skabe overflow her specifikt */
     }
 
     .hero-text {
