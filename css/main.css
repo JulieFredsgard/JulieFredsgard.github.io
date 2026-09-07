@@ -14,7 +14,7 @@ body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-    background-color:  #fffef5;
+    background-color:  whitesmoke;
     display: flex;
     flex-direction: column; /* Stack children vertically */
     overflow-x: hidden;
@@ -110,6 +110,7 @@ h3 {
     margin: 100px 0 400px 0; /* Fjerner al indbygget luft omkring h1 */
     line-height: 1; /* Mindre end 1 gør linjerne tættere sammen */
     font-size: 6.1em; /* Juster størrelsen efter behov */
+    font-weight: 2000; /* Normal vægt */
     z-index: 2; /* Højere end .hero-decoration - ligger derfor ovenpå */
 }
 
@@ -135,6 +136,7 @@ h3 {
 .hero-text h3 {
     margin: 0 100px 0 0; /* Kun luft foroven, resten er 0 */
     font-size: 1.4em; /* Juster størrelsen efter behov */
+    z-index: 2;
 }
 
 .hero-image {
@@ -163,9 +165,10 @@ h3 {
     text-decoration: none; /* Fjerner link-understregning */
     font-family: "Poppins", sans-serif;
     font-size: 1.3em; /* Juster størrelsen efter behov */
-    font-weight: 300;
+    font-weight: 400;
     transition: background-color 0.3s ease; /* Blød farveovergang ved hover */
     width: fit-content; /* Knappen bliver kun så bred som teksten kræver */
+    z-index: 1;
 }
 
 .hero-button:hover {
@@ -173,17 +176,17 @@ h3 {
     color: #f4f1ff; /* Skifter tekstfarven til hvid ved hover */
 }
 
-.hero-decoration {
+.hero-decoration-wrapper {
     position: absolute;
     top: 38%;
     left: 17%;
-    width: 700px;
-    height: 550px;
-    background-color: #5d00ff;
-    opacity: 0.1; /* 0 = usynlig, 1 = fuldt synlig */
     z-index: 1;
     pointer-events: none;
-    animation: blob-morph 30s linear infinite; /* Ændret fra ease-in-out til linear */
+}
+
+.hero-decoration {
+background-color: rgb(255, 234, 131); /* Flyt baggrundsfarven herop */
+    animation: blob-morph 30s linear infinite;
 }
 
 @keyframes blob-morph {
@@ -278,14 +281,11 @@ h3 {
         height: 300px;
     }
 
-    .hero-decoration {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.3); /* Skalerer hele blobben ned til 30% */
-    z-index: 1; /* Lavere end .hero-text's z-index: 2, så det ligger BAGVED */
-    pointer-events: none; /* Forhindrer billedet i at "opsnappe" klik, der er ment for teksten/knappen */
-}
+    .hero-decoration-wrapper {
+        top: 70%;
+        left: 92%;
+        transform: translate(-50%, -50%) scale(0.5); /* Skalerer hele blobben ned til 30% */
+    }
 }
 
 @media screen and (max-width: 1270px) and (min-width: 851px) {
@@ -312,36 +312,63 @@ h3 {
         height: 700px; /* Reduceret fra 1000px */
     }
 
-    .hero-decoration {
-    position: absolute;
-    top: 55%;
-    left: 25%;
-    transform: translate(-50%, -50%); /* Centrerer billedet præcist */
-    width: 250px; /* Juster efter dit billedes størrelse og ønsket effekt */
-    height: 250px;
-    z-index: 1; /* Lavere end .hero-text's z-index: 2, så det ligger BAGVED */
-    pointer-events: none; /* Forhindrer billedet i at "opsnappe" klik, der er ment for teksten/knappen */
-}
+    .hero-decoration-wrapper {
+        top: 75%;
+        left: 40%;
+        transform: translate(-50%, -50%) scale(0.6); /* Skalerer hele blobben ned til 55% */
+    }
 }
 
 .divider-section {
-    background-color: #f4f1ff; /* Vælg selv en farve der passer til din palet */
+    background-color: rgb(247, 237, 255); /* Flyt baggrundsfarven herop */
     height: 400px; /* Juster højden efter smag */
+}
+
+.divider-section2 {
+    background-color: black; /* Vælg selv en farve der passer til din palet */
+    height: 2px; /* Juster højden efter smag */
 }
 
 
 .project-section {
-    background-color: #fffef5; /* Baggrundsfarve for hele sektionen */
-    padding: 70px 30px;
+    background-color: white;
+    padding: 60px 20px 100px 20px; /* Top, sider, bund, sider */
 }
 
 .project-section__heading {
     font-family: "Gilda Display", sans-serif;
     font-size: 2.3em;
     font-weight: 600;
-    max-width: 1400px;
-    margin: 0 auto 16px auto; /* Auto-centreret ligesom resten, med luft nedenunder */
     text-align: left;
+}
+
+.project-section__top {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-section__link {
+    text-decoration: none;
+    color: #000;
+    border: 2px solid #000;
+    padding: 12px 24px;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Forhindrer knappens tekst i at bryde om på flere linjer */
+}
+
+.project-section__link--mobile {
+    display: none;
+}
+
+.project-section__link:hover {
+    background-color: #000;
+    color: #fff;
 }
 
 .project-box {
@@ -386,6 +413,23 @@ h3 {
 @media screen and (max-width: 900px) {
     .project-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-section__top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .project-section__link--desktop {
+        display: none; /* Skjul desktop-knappen på mobil */
+    }
+
+
+.project-section__link--mobile {
+        display: block; /* Ændret fra inline-block til block, så margin: auto virker */
+        margin: 24px auto 0 auto; /* Centrerer via auto margin i stedet for align-self */
+        width: fit-content; /* Sikrer knappen kun er så bred som teksten kræver */
     }
 }
 
@@ -580,8 +624,8 @@ h3 {
 
 
 .skills-section {
-    background-color: #5d00ff; /* Flyt baggrundsfarven herop */
-    padding: 70px 20px 120px 20px; /* Top, sider, bund, sider */
+    background-color: rgb(247, 237, 255); /* Flyt baggrundsfarven herop */
+    padding: 120px 20px 190px 20px; /* Top, sider, bund, sider */
 }
 
 .skills-section__inner {
@@ -591,10 +635,10 @@ h3 {
 
 .skills-section__heading {
     font-family: "Gilda Display", sans-serif;
-    color: #f4f1ff;
+    color: black;
     font-size: 2.3em;
-    font-weight:500;
-    margin: 0 0 60px 0; /* Top sat til 0, bund forbliver 40px */
+    font-weight:600;
+    margin: 0 0 80px 0; /* Top sat til 0, bund forbliver 40px */
     text-align: center;
 }
 
@@ -610,10 +654,14 @@ h3 {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+
+        .skills-section__heading {
+        line-height: 1.1; /* Reducerer afstanden mellem de to linjer */
+    }
 }
 
 .skill-item {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 2px solid black;
     padding: 20px 0;
 }
 
@@ -626,13 +674,14 @@ h3 {
 
 .skill-item__title {
     font-family: "Poppins", sans-serif;
-    color: #fff;
+    color: #000;
     font-size: 1.2em;
+    font-weight: 450;
 }
 
 .skill-item__icon {
     font-size: 1.5em;
-    color: #fff;
+    color: #000;
     transition: transform 0.3s ease; /* Gør rotationen blød */
 }
 
@@ -646,7 +695,7 @@ h3 {
     padding-top: 12px;
     font-size: 0.95em;
     line-height: 1.6;
-    color: #fff;
+    color: #000;
 }
 
 .skill-item__content.is-open {
@@ -657,6 +706,83 @@ h3 {
     transform: rotate(45deg); /* Roterer + til at ligne × */
 }
 
+
+.about-section {
+    background-color: #fffef5;
+    padding: 70px 20px;
+}
+
+.about-section__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start; /* Ændret fra center til flex-start */
+}
+
+.about-section__image {
+    flex: 1.5;
+    max-width: none; /* Fjernet - lad flex-værdien styre bredden i stedet */
+}
+
+.about-section__image img {
+    width: 100%; /* Rettet fra 140% - undgår at billedet stikker udenfor sin egen boks */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.about-section__text {
+    flex: 1; /* Ændret fra 1.5 til 1 - teksten fylder nu ca. 1/3 */
+}
+
+.about-section__heading {
+    font-family: "Gilda Display", sans-serif;
+    font-size: 2.3em;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+}
+
+.about-section__text p {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 450px;
+    padding-left: 80px;
+}
+
+
+.about-section__link {
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 80px; /* Match samme indrykning som brødteksten */
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #000;
+    border: 2px solid #000;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: fit-content;
+}
+
+.about-section__link:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+@media screen and (max-width: 850px) {
+    .about-section__inner {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about-section__image {
+        max-width: 100%;
+    }
+}
 
 
 
