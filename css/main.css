@@ -478,6 +478,10 @@ h3 {
     display: block;
 }
 
+.navbar-logo .logo-mobile {
+    display: none; /* Skjult som standard på desktop */
+}
+
 .navbar-logo img {
     height: 40px; 
     width: auto;
@@ -544,6 +548,14 @@ h3 {
     .navbar-burger {
         display: flex;
         z-index: 1001; /* Sikrer knappen forbliver klikbar ovenpå menuen */
+    }
+
+    .navbar-logo .logo-default {
+        display: none; /* Skjul den lyse version på mobil */
+    }
+
+    .navbar-logo .logo-mobile {
+        display: block; /* Vis den mørke version i stedet */
     }
 }
 
