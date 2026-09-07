@@ -80,7 +80,8 @@ h3 {
     position: relative; /* Gør det muligt at placere .hero-image "absolut" indeni */
     display: flex;
     align-items: center;
-    height: 1000px
+    height: 1000px;
+    overflow: hidden; /* Ny linje - forhindrer blobben i nogensinde at skabe overflow her */ 
 }
 
 .hero-section {
