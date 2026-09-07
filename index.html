@@ -175,6 +175,7 @@
             burgerBtn.addEventListener('click', function() {
                 navMenu.classList.toggle('is-open');
                 burgerBtn.classList.toggle('is-active');
+                document.body.classList.toggle('menu-open');
             });
 
             // --- Luk menuen automatisk, når man klikker på et link ---
@@ -183,6 +184,7 @@
                 link.addEventListener('click', function() {
                     navMenu.classList.remove('is-open');
                     burgerBtn.classList.remove('is-active');
+                    document.body.classList.remove('menu-open');
                 });
             });
         });

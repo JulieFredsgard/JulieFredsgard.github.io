@@ -20,6 +20,10 @@ body {
     overflow-x: hidden;
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+
 
 /* Container for consistent margins */
 .container {
@@ -505,13 +509,13 @@ h3 {
 .navbar-burger span {
     display: block;
     width: 100%;
-    height: 2px;
+    height: 3px;
     background-color: #fffef5; /* Match navbar-linkenes farve */
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .navbar-burger.is-active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg); /* Justeret fra 7px */
 }
 
 .navbar-burger.is-active span:nth-child(2) {
@@ -519,10 +523,20 @@ h3 {
 }
 
 .navbar-burger.is-active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg); /* Justeret fra -7px */
 }
 
 @media screen and (max-width: 850px) {
+    .navbar {
+        background-color: #fffef5; /* Solid, hvid baggrund i stedet for transparent */
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Let skygge, så den adskiller sig visuelt fra indholdet under */
+        position: static; /* Fjerner "fixed" - navbaren bliver nu en almindelig del af sidens flow */
+    }
+
+    .navbar a {
+        color: #000; /* Sort tekst - lys baggrund kræver mørk tekst nu */
+    }
+
     .navbar-right {
         display: none;
         position: fixed;
@@ -535,6 +549,7 @@ h3 {
         align-items: center;
         justify-content: center;
         gap: 20px;
+        z-index: 1001; /* Match burger-knappens z-index, sikrer den ligger øverst */
     }
 
     .navbar-right a {
@@ -548,6 +563,10 @@ h3 {
     .navbar-burger {
         display: flex;
         z-index: 1001; /* Sikrer knappen forbliver klikbar ovenpå menuen */
+    }
+
+    .navbar-burger span {
+        background-color: #000; /* Burger-stregerne skal også være mørke nu */
     }
 
     .navbar-logo .logo-default {
@@ -648,6 +667,7 @@ h3 {
 /* Media Queries */
 @media screen and (max-width: 768px) {
     /* Make the navbar stack vertically on smaller screens */
+    
     .navbar a {
         float: none; /* Stack the links */
         display: block; /* Make them full-width */
