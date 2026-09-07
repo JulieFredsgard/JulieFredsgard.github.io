@@ -98,12 +98,14 @@ h3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 2; /* Højere end .hero-decoration - ligger derfor ovenpå */
 }
 
 .hero-text h1 {
     margin: 100px 0 400px 0; /* Fjerner al indbygget luft omkring h1 */
     line-height: 1; /* Mindre end 1 gør linjerne tættere sammen */
-    font-size: 6em; /* Juster størrelsen efter behov */
+    font-size: 6.1em; /* Juster størrelsen efter behov */
+    z-index: 2; /* Højere end .hero-decoration - ligger derfor ovenpå */
 }
 
 .fake-aa {
@@ -113,16 +115,15 @@ h3 {
 
 .fake-aa__icon {
     position: absolute;
-    top: -0.2em;
-    left: 47%;
+    top: -0.21em;
+    left: 48%;
     transform: translateX(-50%);
     line-height: 1;
 }
 
-.fake-aa__icon svg {
-    color: #5d00ff;
-    width: 26px;
-    height: 26px;
+.fake-aa__icon img {
+    width: 25px;
+    height: 25px;
     display: block;
 }
 
@@ -137,6 +138,7 @@ h3 {
     right: 0; /* Billedet starter i højre side */
     width: 50%; /* Samme bredde som før, men målt fra skærmens kant, ikke fra max-width */
     height: 100%;
+    z-index: 3;
 }
 
 .hero-image img {
@@ -166,7 +168,63 @@ h3 {
     color: #f4f1ff; /* Skifter tekstfarven til hvid ved hover */
 }
 
+.hero-decoration {
+    position: absolute;
+    top: 38%;
+    left: 17%;
+    width: 700px;
+    height: 550px;
+    background-color: #5d00ff;
+    opacity: 0.1; /* 0 = usynlig, 1 = fuldt synlig */
+    z-index: 1;
+    pointer-events: none;
+    animation: blob-morph 30s linear infinite; /* Ændret fra ease-in-out til linear */
+}
 
+@keyframes blob-morph {
+    0% {
+        width: 620px;
+        height: 620px;
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+        transform: translate(-50%, -50%) translate(0px, 0px) rotate(0deg);
+    }
+    16% {
+        width: 700px;
+        height: 570px;
+        border-radius: 58% 42% 55% 45% / 60% 40% 60% 40%;
+        transform: translate(-50%, -50%) translate(35px, 84px) rotate(10deg);
+    }
+    33% {
+        width: 550px;
+        height: 700px;
+        border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+        transform: translate(-50%, -50%) translate(45px, 176px) rotate(20deg);
+    }
+    50% {
+        width: 680px;
+        height: 590px;
+        border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+        transform: translate(-50%, -50%) translate(0px, 260px) rotate(5deg);
+    }
+    66% {
+        width: 570px;
+        height: 660px;
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: translate(-50%, -50%) translate(-45px, 176px) rotate(-15deg);
+    }
+    83% {
+        width: 690px;
+        height: 560px;
+        border-radius: 55% 45% 40% 60% / 40% 55% 45% 60%;
+        transform: translate(-50%, -50%) translate(-35px, 84px) rotate(-25deg);
+    }
+    100% {
+        width: 620px;
+        height: 620px;
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+        transform: translate(-50%, -50%) translate(0px, 0px) rotate(0deg);
+    }
+}
 
 
 @media screen and (max-width: 850px) {
@@ -186,16 +244,16 @@ h3 {
 
     .hero-text h1 {
         margin: 40px 0 20px 0; /* Meget mindre margin end de 100px/400px */
-        font-size: 2.9em; /* Reduceret fra 6em */
+        font-size: 2.93em; /* Reduceret fra 6em */
     }
 
-    .fake-aa__icon svg {
-        width: 14px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
-        height: 14px;
+    .fake-aa__icon img {
+        width: 12px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
+        height: 12px;
     }
 
     .fake-aa__icon {
-        top: -0.24em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
+        top: -0.23em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
     }
 
     .hero-text h3 {
@@ -213,6 +271,15 @@ h3 {
         width: 100%;
         height: 300px;
     }
+
+    .hero-decoration {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3); /* Skalerer hele blobben ned til 30% */
+    z-index: 1; /* Lavere end .hero-text's z-index: 2, så det ligger BAGVED */
+    pointer-events: none; /* Forhindrer billedet i at "opsnappe" klik, der er ment for teksten/knappen */
+}
 }
 
 @media screen and (max-width: 1270px) and (min-width: 851px) {
@@ -221,13 +288,13 @@ h3 {
         margin: 60px 0 200px 0; /* Reduceret fra 100px/400px */
     }
 
-        .fake-aa__icon svg {
-        width: 18px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
-        height: 18px;
+        .fake-aa__icon img {
+        width: 17px; /* Reduceret fra 26px, proportionalt med den mindre h1 */
+        height: 17px;
     }
 
     .fake-aa__icon {
-        top: -0.21em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
+        top: -0.22em; /* Justér denne værdi, til ikonet igen sidder pænt over "A" */
     }
 
     .hero-text h3 {
@@ -238,6 +305,17 @@ h3 {
     .hero-wrapper {
         height: 700px; /* Reduceret fra 1000px */
     }
+
+    .hero-decoration {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    transform: translate(-50%, -50%); /* Centrerer billedet præcist */
+    width: 250px; /* Juster efter dit billedes størrelse og ønsket effekt */
+    height: 250px;
+    z-index: 1; /* Lavere end .hero-text's z-index: 2, så det ligger BAGVED */
+    pointer-events: none; /* Forhindrer billedet i at "opsnappe" klik, der er ment for teksten/knappen */
+}
 }
 
 .divider-section {
@@ -353,7 +431,7 @@ h3 {
 .navbar-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px; 
+    padding: 0; 
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -391,6 +469,11 @@ h3 {
 /* Right-aligned links */
 .navbar-right {
     display: flex;
+}
+
+.navbar-logo {
+    padding: 0;
+    display: block;
 }
 
 .navbar-logo img {
